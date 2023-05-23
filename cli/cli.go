@@ -1,11 +1,10 @@
 package cli
 
 import (
+	"github.com/Jeffail/gabs"
 	"log"
 	"net/http"
 	"sync"
-
-	"github.com/Jeffail/gabs"
 )
 
 type RequestBody struct {
