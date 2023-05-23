@@ -2,6 +2,7 @@ package cli
 
 import (
 	"github.com/Jeffail/gabs"
+	"io"
 	"log"
 	"net/http"
 	"sync"
@@ -37,7 +38,12 @@ func RequestTranslate(body *RequestBody, str chan string, wg *sync.WaitGroup) {
 		log.Fatalf("2 There was a problem: %s", err)
 	}
 
-	defer res.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(res.Body)
 
 	if res.StatusCode == http.StatusTooManyRequests {
 		str <- "You have been rate limited, Try again later."
@@ -46,7 +52,6 @@ func RequestTranslate(body *RequestBody, str chan string, wg *sync.WaitGroup) {
 	}
 
 	parsedJson, err := gabs.ParseJSONBuffer(res.Body)
-
 	if err != nil {
 		log.Fatalf("3 There was a problem - %s", err)
 	}

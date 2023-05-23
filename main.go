@@ -16,8 +16,8 @@ var sourceText string
 
 func init() {
 	flag.StringVar(&sourceLang, "s", "en", "Source Language[en]")
-	flag.StringVar(&targetLang, "r", "fr", "Target Language[fr]")
-	flag.StringVar(&sourceText, "text", "", "Text to translate")
+	flag.StringVar(&targetLang, "t", "fr", "Target Language[fr]")
+	flag.StringVar(&sourceText, "st", "", "Text to translate")
 }
 
 func main() {
